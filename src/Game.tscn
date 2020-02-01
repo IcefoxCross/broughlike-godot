@@ -194,7 +194,4 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-centered = false
-hframes = 32
+[node name="Monsters" type="Node2D" parent="."]

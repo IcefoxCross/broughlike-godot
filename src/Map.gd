@@ -5,6 +5,7 @@ extends Node2D
 onready var tilemap: = $TileMap
 
 var tiles = []
+var monsters = []
 
 func _ready():
 	randomize()
@@ -21,6 +22,7 @@ func generateLevel():
 		timeout -= 1
 		if generateTiles() == randomPassableTile().getConnectedTiles().size():
 			break;
+	generateMonsters()
 
 func generateTiles():
 	var passableTiles = 0
@@ -52,9 +54,26 @@ func randomPassableTile():
 	var timeout = 1000
 	while timeout > 0:
 		timeout -= 1
-		var x = floor(rand_range(1, GameEngine.numTiles-1))
-		var y = floor(rand_range(1, GameEngine.numTiles-1))
+		var x = floor(rand_range(0, GameEngine.numTiles-1))
+		var y = floor(rand_range(0, GameEngine.numTiles-1))
 		tile = getTile(x,y)
-		if tile.passable and not tile.monster:
+		if tile.passable and tile.monster == null:
 			return tile
 	return null
+
+func generateMonsters():
+	if not monsters.empty():
+		for e in monsters:
+			e.queue_free()
+	var numMonsters = GameEngine.level + 1
+	for i in range(numMonsters):
+		var m = spawnMonster()
+		monsters.append(m)
+		GameEngine.gameMonsters.add_child(m)
+
+func spawnMonster():
+	var monsterTypes = ["Bird", "Snake", "Tank", "Eater", "Jester"]
+	var monsterType = monsterTypes[randi() % monsterTypes.size()]
+	var monster = load("res://src/monsters/%s.tscn" % monsterType).instance()
+	monster.setup(randomPassableTile())
+	return monster

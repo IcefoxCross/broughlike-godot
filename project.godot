@@ -9,10 +9,45 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Monster",
+"class": "Bird",
+"language": "GDScript",
+"path": "res://src/monsters/Bird.gd"
+}, {
+"base": "Monster",
+"class": "Eater",
+"language": "GDScript",
+"path": "res://src/monsters/Eater.gd"
+}, {
 "base": "Tile",
 "class": "Floor",
 "language": "GDScript",
 "path": "res://src/tiles/Floor.gd"
+}, {
+"base": "Monster",
+"class": "Jester",
+"language": "GDScript",
+"path": "res://src/monsters/Jester.gd"
+}, {
+"base": "Node2D",
+"class": "Monster",
+"language": "GDScript",
+"path": "res://src/monsters/Monster.gd"
+}, {
+"base": "Monster",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/monsters/Player.gd"
+}, {
+"base": "Monster",
+"class": "Snake",
+"language": "GDScript",
+"path": "res://src/monsters/Snake.gd"
+}, {
+"base": "Monster",
+"class": "Tank",
+"language": "GDScript",
+"path": "res://src/monsters/Tank.gd"
 }, {
 "base": "Node",
 "class": "Tile",
@@ -25,7 +60,14 @@ _global_script_classes=[ {
 "path": "res://src/tiles/Wall.gd"
 } ]
 _global_script_class_icons={
+"Bird": "",
+"Eater": "",
 "Floor": "",
+"Jester": "",
+"Monster": "",
+"Player": "",
+"Snake": "",
+"Tank": "",
 "Tile": "",
 "Wall": ""
 }
