@@ -8,15 +8,36 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Tile",
+"class": "Floor",
+"language": "GDScript",
+"path": "res://src/tiles/Floor.gd"
+}, {
+"base": "Node",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://src/tiles/Tile.gd"
+}, {
+"base": "Tile",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://src/tiles/Wall.gd"
+} ]
 _global_script_class_icons={
-
+"Floor": "",
+"Tile": "",
+"Wall": ""
 }
 
 [application]
 
 config/name="broughlike"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameEngine="*res://src/GameEngine.gd"
 
 [display]
 

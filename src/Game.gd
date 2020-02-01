@@ -1,17 +1,26 @@
 extends Node2D
 
-var tileSize = 16
-var numTiles = 9
-var uiWidth = 4
+onready var map: = $Map
 
 var pos = Vector2.ZERO
 
 
 func _ready():
+	GameEngine.gameMap = map
 	$ColorRect.modulate = Color.indigo
-	$Sprite.position = pos
+	map.generateLevel()
+	map.drawMap()
+	var startingTile = map.randomPassableTile()
+	pos = Vector2(startingTile.tile_position.x, startingTile.tile_position.y)
+	$Sprite.position = pos * GameEngine.tileSize
+	
+	
 
 func _process(delta):
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().reload_current_scene()
+	
 	var vel = Vector2.ZERO
 	if Input.is_action_just_pressed("ui_left"):
 		vel.x = -1
@@ -23,4 +32,4 @@ func _process(delta):
 		vel.y = 1
 	
 	if vel.length() > 0:
-		$Sprite.position += vel * tileSize
+		$Sprite.position += vel * GameEngine.tileSize
