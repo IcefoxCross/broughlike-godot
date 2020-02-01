@@ -77,3 +77,14 @@ func spawnMonster():
 	var monster = load("res://src/monsters/%s.tscn" % monsterType).instance()
 	monster.setup(randomPassableTile())
 	return monster
+
+func replaceTile(oldTile, newTileType):
+	var newTile
+	match newTileType:
+		"Floor":
+			newTile = Floor.new(oldTile.tile_position.x, oldTile.tile_position.y)
+		"Wall":
+			newTile = Wall.new(oldTile.tile_position.x, oldTile.tile_position.y)
+	tiles[oldTile.tile_position.x][oldTile.tile_position.y] = newTile
+	tiles[oldTile.tile_position.x][oldTile.tile_position.y].drawTile(tilemap)
+	return tiles[newTile.tile_position.x][newTile.tile_position.y]

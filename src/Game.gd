@@ -42,4 +42,5 @@ func tick():
 		if not m.dead:
 			m.update()
 		else:
+			GameEngine.gameMap.monsters.erase(m)
 			m.queue_free()
