@@ -3,6 +3,7 @@ extends Node2D
 #const TILE = preload("res://src/Tile.gd")
 
 onready var tilemap: = $TileMap
+onready var treasureMap = $TileMap2
 
 var tiles = []
 var monsters = []
@@ -13,7 +14,7 @@ func _ready():
 func drawMap():
 	for i in range(GameEngine.numTiles):
 		for j in range(GameEngine.numTiles):
-			getTile(i,j).drawTile(tilemap)
+			getTile(i,j).drawTile()
 
 func generateLevel():
 	# Try to
@@ -23,6 +24,9 @@ func generateLevel():
 		if generateTiles() == randomPassableTile().getConnectedTiles().size():
 			break;
 	generateMonsters()
+	
+	for i in range(3):
+		randomPassableTile().treasure = true
 
 func generateTiles():
 	var passableTiles = 0
@@ -61,6 +65,19 @@ func randomPassableTile():
 			return tile
 	return null
 
+func randomEmptyTile():
+	var tile = null
+	# Try to
+	var timeout = 1000
+	while timeout > 0:
+		timeout -= 1
+		var x = floor(rand_range(0, GameEngine.numTiles-1))
+		var y = floor(rand_range(0, GameEngine.numTiles-1))
+		tile = getTile(x,y)
+		if tile.passable and not tile.treasure and tile.monster == null:
+			return tile
+	return null
+
 func generateMonsters():
 	if not monsters.empty():
 		for e in monsters:
@@ -89,5 +106,5 @@ func replaceTile(oldTile, newTileType):
 		"Exit":
 			newTile = Exit.new(oldTile.tile_position.x, oldTile.tile_position.y)
 	tiles[oldTile.tile_position.x][oldTile.tile_position.y] = newTile
-	tiles[oldTile.tile_position.x][oldTile.tile_position.y].drawTile(tilemap)
+	tiles[oldTile.tile_position.x][oldTile.tile_position.y].drawTile()
 	return tiles[newTile.tile_position.x][newTile.tile_position.y]

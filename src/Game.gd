@@ -57,6 +57,7 @@ func tick():
 			GameEngine.gameMap.monsters.erase(m)
 			m.queue_free()
 	if player.dead:
+		GameEngine.addScore(GameEngine.score, false)
 		GameEngine.gameState = "dead"
 	
 	spawnCounter -= 1
@@ -68,12 +69,14 @@ func tick():
 func startGame():
 	$TitleScreen.visible = false
 	GameEngine.level = 1
+	GameEngine.score = 0
 	startLevel(GameEngine.startingHp)
 	GameEngine.gameState = "running"
 
 func showTitle():
 	GameEngine.gameState = "title"
 	$TitleScreen.visible = true
+	$TitleScreen/ScoresControl.drawScores()
 
 func startLevel(playerHp):
 	# Clean up
@@ -84,10 +87,13 @@ func startLevel(playerHp):
 	map.generateLevel()
 	map.drawMap()
 	player = load("res://src/monsters/Player.tscn").instance()
-	player.setup(map.randomPassableTile())
+	player.setup(map.randomEmptyTile())
 	player.connect("player_done", self, "tick")
 	player.hp = playerHp
 	monsters.add_child(player)
 	GameEngine.gamePlayer = player
 	map.replaceTile(map.randomPassableTile(), "Exit")
 	$LevelLabel.text = "Level: %s" % GameEngine.level
+
+func drawScore():
+	$ScoreLabel.text = "Score: %s" % GameEngine.score

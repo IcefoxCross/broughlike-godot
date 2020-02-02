@@ -18,6 +18,10 @@ func tryMove(dx, dy):
 		if can_act:
 			emit_signal("player_done")
 
+func die():
+	.die()
+	can_act = false
+
 func _unhandled_input(event):
 	if GameEngine.gameState == "running" and can_act:
 		get_tree().set_input_as_handled()
