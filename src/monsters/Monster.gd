@@ -10,14 +10,13 @@ var isPlayer = false
 var dead = false
 var attackedThisTurn = false
 var stunned = false
+var teleportCounter = 0 setget set_teleportCounter
 
 func init(_tile, _sprite, _hp):
 	move(_tile)
 	sprite = _sprite
 	hp = _hp
-	
-	$Sprite.frame = sprite
-	drawHp()
+	self.teleportCounter = 2
 
 func tryMove(dx, dy):
 	var newTile = tile.getNeighbor(dx,dy)
@@ -40,9 +39,11 @@ func move(_tile):
 	var pos = Vector2(tile.tile_position.x, tile.tile_position.y)
 	position = pos * GameEngine.tileSize
 	tile.monster = self
+	tile.stepOn(self)
 
 func update():
-	if stunned:
+	self.teleportCounter -= 1
+	if stunned or teleportCounter > 0:
 		stunned = false
 		return
 	doStuff()
@@ -78,3 +79,11 @@ func die():
 func heal(damage):
 	hp = min(GameEngine.maxHp, hp + damage)
 	drawHp()
+
+func set_teleportCounter(value):
+	teleportCounter = value
+	if teleportCounter > 0:
+		$Sprite.frame = 10
+	else:
+		$Sprite.frame = sprite
+		drawHp()

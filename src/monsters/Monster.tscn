@@ -24,6 +24,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 1.0
 margin_right = 5.0
 margin_bottom = 16.0
@@ -33,6 +34,7 @@ __meta__ = {
 }
 
 [node name="TextureRect2" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 6.0
 margin_right = 10.0
 margin_bottom = 16.0
@@ -42,6 +44,7 @@ __meta__ = {
 }
 
 [node name="TextureRect3" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 11.0
 margin_right = 15.0
 margin_bottom = 16.0
@@ -51,6 +54,7 @@ __meta__ = {
 }
 
 [node name="TextureRect4" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 1.0
 margin_top = -5.0
 margin_right = 5.0
@@ -61,6 +65,7 @@ __meta__ = {
 }
 
 [node name="TextureRect5" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 6.0
 margin_top = -5.0
 margin_right = 10.0
@@ -71,6 +76,7 @@ __meta__ = {
 }
 
 [node name="TextureRect6" type="TextureRect" parent="HP"]
+visible = false
 margin_left = 11.0
 margin_top = -5.0
 margin_right = 15.0

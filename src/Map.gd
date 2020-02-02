@@ -65,17 +65,18 @@ func generateMonsters():
 	if not monsters.empty():
 		for e in monsters:
 			e.queue_free()
+	monsters = []
 	var numMonsters = GameEngine.level + 1
 	for i in range(numMonsters):
-		var m = spawnMonster()
-		monsters.append(m)
-		GameEngine.gameMonsters.add_child(m)
+		spawnMonster()
 
 func spawnMonster():
 	var monsterTypes = ["Bird", "Snake", "Tank", "Eater", "Jester"]
 	var monsterType = monsterTypes[randi() % monsterTypes.size()]
 	var monster = load("res://src/monsters/%s.tscn" % monsterType).instance()
 	monster.setup(randomPassableTile())
+	monsters.append(monster)
+	GameEngine.gameMonsters.add_child(monster)
 	return monster
 
 func replaceTile(oldTile, newTileType):
@@ -85,6 +86,8 @@ func replaceTile(oldTile, newTileType):
 			newTile = Floor.new(oldTile.tile_position.x, oldTile.tile_position.y)
 		"Wall":
 			newTile = Wall.new(oldTile.tile_position.x, oldTile.tile_position.y)
+		"Exit":
+			newTile = Exit.new(oldTile.tile_position.x, oldTile.tile_position.y)
 	tiles[oldTile.tile_position.x][oldTile.tile_position.y] = newTile
 	tiles[oldTile.tile_position.x][oldTile.tile_position.y].drawTile(tilemap)
 	return tiles[newTile.tile_position.x][newTile.tile_position.y]

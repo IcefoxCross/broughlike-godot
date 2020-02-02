@@ -58,3 +58,6 @@ static func sort_ascending(a : Tile, b : Tile):
 
 func dist(other : Tile):
 	return int(abs(tile_position.x - other.tile_position.x)) + int(abs(tile_position.y - other.tile_position.y))
+
+func stepOn(_monster):
+	pass
