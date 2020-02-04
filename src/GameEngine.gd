@@ -11,6 +11,7 @@ var uiWidth = 4
 var level = 1
 var score = 0 setget set_score
 var maxHp = 6
+var numSpells = 1
 
 var startingHp = 3
 var numLevels = 6
@@ -22,6 +23,7 @@ var gameMonsters = null
 var gamePlayer = null
 var gameScreen = null
 var gameCamera = null
+var gameEffects = null
 
 func set_score(value):
 	score = value

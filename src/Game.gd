@@ -15,6 +15,7 @@ func _ready():
 	GameEngine.gameMap = map
 	GameEngine.gameMonsters = monsters
 	GameEngine.gameCamera = $Camera2D
+	GameEngine.gameEffects = $Effects
 	$ColorRect.modulate = Color.indigo
 	$ColorRect.visible = true
 	showTitle()
@@ -57,6 +58,7 @@ func tick():
 		else:
 			GameEngine.gameMap.monsters.erase(m)
 			m.queue_free()
+	player.update()
 	if player.dead:
 		GameEngine.addScore(GameEngine.score, false)
 		GameEngine.gameState = "dead"
@@ -74,6 +76,7 @@ func startGame():
 	$TitleScreen.visible = false
 	GameEngine.level = 1
 	GameEngine.score = 0
+	GameEngine.numSpells = 9
 	startLevel(GameEngine.startingHp)
 	GameEngine.gameState = "running"
 
@@ -82,7 +85,7 @@ func showTitle():
 	$TitleScreen.visible = true
 	$TitleScreen/ScoresControl.drawScores()
 
-func startLevel(playerHp):
+func startLevel(playerHp, playerSpells = null):
 	# Clean up
 	for m in monsters.get_children():
 		m.queue_free()
@@ -94,10 +97,21 @@ func startLevel(playerHp):
 	player.setup(map.randomEmptyTile())
 	player.connect("action_done", self, "tick")
 	player.hp = playerHp
+	player.drawHp()
+	if playerSpells:
+		player.spells = playerSpells
 	monsters.add_child(player)
 	GameEngine.gamePlayer = player
 	map.replaceTile(map.randomPassableTile(), "Exit")
 	$LevelLabel.text = "Level: %s" % GameEngine.level
+	drawSpells()
 
 func drawScore():
 	$ScoreLabel.text = "Score: %s" % GameEngine.score
+
+func drawSpells():
+	$SpellsLabel.text = ""
+	for i in range(player.spells.size()):
+		$SpellsLabel.text += "%s) %s" % [i+1, "" if player.spells[i] == null else player.spells[i]]
+		if i < (player.spells.size()-1):
+			$SpellsLabel.text += "\n"

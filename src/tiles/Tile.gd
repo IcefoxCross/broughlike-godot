@@ -74,3 +74,9 @@ func set_treasure(value):
 		GameEngine.gameMap.treasureMap.set_cellv(tile_position, 12)
 	else:
 		GameEngine.gameMap.treasureMap.set_cellv(tile_position, -1)
+
+func setEffect(effectSprite):
+	var e = load("res://src/Effect.tscn").instance()
+	GameEngine.gameEffects.add_child(e)
+	e.position = tile_position * GameEngine.tileSize
+	e.init(effectSprite)

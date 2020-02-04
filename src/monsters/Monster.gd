@@ -13,8 +13,11 @@ var dead = false
 var attackedThisTurn = false
 var stunned = false
 var teleportCounter = 0 setget set_teleportCounter
+var bonusAttack = 0
+var shield = 0
 
 var offset = Vector2.ZERO
+var lastMove = Vector2.ZERO
 
 func init(_tile, _sprite, _hp):
 	move(_tile)
@@ -26,13 +29,15 @@ func init(_tile, _sprite, _hp):
 func tryMove(dx, dy):
 	var newTile = tile.getNeighbor(dx,dy)
 	if newTile.passable:
+		lastMove = Vector2(dx,dy)
 		if not newTile.monster:
 			move(newTile)
 		else:
 			if isPlayer != newTile.monster.isPlayer:
 				newTile.monster.stunned = true
 				attackedThisTurn = true
-				newTile.monster.hit(1)
+				newTile.monster.hit(1 + bonusAttack)
+				bonusAttack = 0
 				GameEngine.gameCamera.shakeAmount = 5
 				offset.x = (newTile.tile_position.x - tile.tile_position.x) / 2
 				offset.y = (newTile.tile_position.y - tile.tile_position.y) / 2
@@ -93,6 +98,8 @@ func drawHp():
 		h.visible = h.get_index() < hp
 
 func hit(damage):
+	if shield > 0:
+		return
 	hp -= damage
 	drawHp()
 	if hp <= 0:
@@ -107,6 +114,9 @@ func die():
 	tile.monster = null
 	if isPlayer:
 		$Sprite.frame = 1
+	else:
+		GameEngine.gameMap.monsters.erase(self)
+		queue_free()
 
 func heal(damage):
 	hp = min(GameEngine.maxHp, hp + damage)
