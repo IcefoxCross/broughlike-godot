@@ -86,6 +86,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameEngine="*res://src/GameEngine.gd"
+SoundManager="*res://src/SoundManager.tscn"
 
 [display]
 

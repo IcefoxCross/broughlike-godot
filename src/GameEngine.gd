@@ -21,6 +21,7 @@ var gameMap = null
 var gameMonsters = null
 var gamePlayer = null
 var gameScreen = null
+var gameCamera = null
 
 func set_score(value):
 	score = value

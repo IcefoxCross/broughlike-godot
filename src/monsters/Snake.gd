@@ -8,6 +8,6 @@ func setup(_tile):
 func doStuff():
 	attackedThisTurn = false
 	.doStuff()
-	
+	yield(self, "action_done")
 	if not attackedThisTurn:
 		.doStuff()

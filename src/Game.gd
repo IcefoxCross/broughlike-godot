@@ -14,6 +14,7 @@ func _ready():
 	GameEngine.gameScreen = self
 	GameEngine.gameMap = map
 	GameEngine.gameMonsters = monsters
+	GameEngine.gameCamera = $Camera2D
 	$ColorRect.modulate = Color.indigo
 	$ColorRect.visible = true
 	showTitle()
@@ -59,6 +60,9 @@ func tick():
 	if player.dead:
 		GameEngine.addScore(GameEngine.score, false)
 		GameEngine.gameState = "dead"
+	else:
+		yield(get_tree().create_timer(.2), "timeout")
+		player.can_act = true
 	
 	spawnCounter -= 1
 	if spawnCounter <= 0:
@@ -88,7 +92,7 @@ func startLevel(playerHp):
 	map.drawMap()
 	player = load("res://src/monsters/Player.tscn").instance()
 	player.setup(map.randomEmptyTile())
-	player.connect("player_done", self, "tick")
+	player.connect("action_done", self, "tick")
 	player.hp = playerHp
 	monsters.add_child(player)
 	GameEngine.gamePlayer = player

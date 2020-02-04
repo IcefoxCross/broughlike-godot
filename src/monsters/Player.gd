@@ -5,22 +5,23 @@ class_name Player
 signal player_done
 
 var can_act = false
+var alive = false
 
 func setup(_tile):
 	print("setup")
 	init(_tile, 0, 3)
 	isPlayer = true
+	alive = true
 	can_act = true
 	self.teleportCounter = 0
 
 func tryMove(dx, dy):
 	if .tryMove(dx, dy):
-		if can_act:
-			emit_signal("player_done")
+		can_act = false
 
 func die():
 	.die()
-	can_act = false
+	alive = false
 
 func _unhandled_input(event):
 	if GameEngine.gameState == "running" and can_act:
