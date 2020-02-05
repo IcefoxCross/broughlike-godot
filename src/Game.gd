@@ -76,7 +76,7 @@ func startGame():
 	$TitleScreen.visible = false
 	GameEngine.level = 1
 	GameEngine.score = 0
-	GameEngine.numSpells = 9
+	GameEngine.numSpells = 1
 	startLevel(GameEngine.startingHp)
 	GameEngine.gameState = "running"
 

@@ -37,6 +37,7 @@ func MAELSTROM():
 func MULLIGAN():
 	GameEngine.gameScreen.startLevel(1, GameEngine.gamePlayer.spells)
 
+# Heal yourself and enemies adjacent to you by 1 HP.
 func AURA():
 	GameEngine.gamePlayer.can_act = false
 	for t in GameEngine.gamePlayer.tile.getAdjacentNeighbors():
