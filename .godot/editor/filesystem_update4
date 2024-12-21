@@ -1,0 +1,4 @@
+res://entities/entity.tscn
+res://entities/player.tscn
+res://scenes/game.tscn
+res://scenes/game.gd

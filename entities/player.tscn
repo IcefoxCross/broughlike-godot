@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvptounm7n1kx"]
+
+[ext_resource type="PackedScene" uid="uid://dvb5tyf8ytrnl" path="res://entities/entity.tscn" id="1_l48mw"]
+[ext_resource type="Texture2D" uid="uid://2p20bkfbe67n" path="res://assets/spritesheet.png" id="2_uxdsw"]
+
+[node name="Player" instance=ExtResource("1_l48mw")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_uxdsw")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+region_filter_clip_enabled = true
