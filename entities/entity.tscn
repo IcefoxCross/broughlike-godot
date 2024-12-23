@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dvb5tyf8ytrnl"]
+[gd_scene load_steps=2 format=3 uid="uid://dvb5tyf8ytrnl"]
+
+[ext_resource type="Script" path="res://entities/entity.gd" id="1_uyisy"]
 
 [node name="Entity" type="Node2D"]
+script = ExtResource("1_uyisy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -14,6 +14,10 @@ config/name="Broughlike"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Singletons="*res://autoloads/Singletons.gd"
+
 [display]
 
 window/size/viewport_width=208
@@ -22,10 +26,16 @@ window/size/window_width_override=832
 window/size/window_height_override=576
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/function_type_autocomplete/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
 "res://assets/": "red",
+"res://autoloads/": "purple",
+"res://components/": "orange",
 "res://entities/": "yellow",
 "res://scenes/": "green"
 }
