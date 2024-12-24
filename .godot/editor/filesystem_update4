@@ -13,3 +13,4 @@ res://entities/tank.gd
 res://entities/player.gd
 res://entities/entity.gd
 res://components/tiles/Tile.gd
+res://entities/bird.tscn

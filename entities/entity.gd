@@ -3,6 +3,7 @@ class_name Entity extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 var sprite_index:int
+var sprite_color:Color
 var hp:int
 var dead:bool = false
 
@@ -10,6 +11,7 @@ var tile:Tile = null
 
 func _ready() -> void:
 	sprite_2d.frame = sprite_index
+	if sprite_color: sprite_2d.modulate = sprite_color
 
 func create(new_tile:Tile, _sprite_index:int, starting_hp:int) -> Entity:
 	move(new_tile)
