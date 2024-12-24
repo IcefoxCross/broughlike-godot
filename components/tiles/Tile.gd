@@ -5,12 +5,15 @@ var sprite_index:int
 var is_passable:bool
 var entity:Entity
 
-func _init(x, y, index, passable) -> void:
+func _init(x:int, y:int, index:int, passable:bool) -> void:
 	tile_position = Vector2(x, y)
 	sprite_index = index
 	is_passable = passable
 
-func get_neighbor(dx, dy) -> Tile:
+func distance_to(other_tile:Tile) -> int:
+	return abs(tile_position.x - other_tile.tile_position.x) + abs(tile_position.y - other_tile.tile_position.y)
+
+func get_neighbor(dx:int, dy:int) -> Tile:
 	return Singletons.map.get_tile(tile_position.x + dx, tile_position.y + dy)
 
 func get_adjacent_neighbors() -> Array:

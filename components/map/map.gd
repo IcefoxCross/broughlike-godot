@@ -4,6 +4,9 @@ class_name Map extends Node2D
 
 var tiles:Array
 
+var monster_types := ["bird", "snake", "tank", "eater", "jester"]
+var monsters:Array[Entity]
+
 func _ready() -> void:
 	Singletons.map = self
 
@@ -18,6 +21,7 @@ func generate_level() -> void:
 		timeout -= 1
 		if generate_tiles() == random_passable_tile().get_connected_tiles().size():
 			break
+	generate_monsters()
 
 func generate_tiles() -> int:
 	var passable_tiles = 0
@@ -34,10 +38,10 @@ func generate_tiles() -> int:
 			tiles[i].append(tile)
 	return passable_tiles
 
-func in_bounds(x, y) -> bool:
+func in_bounds(x:int, y:int) -> bool:
 	return (x > 0 and y > 0 and x < Game.NUM_TILES-1 and y < Game.NUM_TILES-1)
 
-func get_tile(x, y) -> Tile:
+func get_tile(x:int, y:int) -> Tile:
 	if in_bounds(x, y): return tiles[x][y]
 	else: return Wall.new(x, y)
 
@@ -51,3 +55,15 @@ func random_passable_tile() -> Tile:
 		tile = get_tile(x, y)
 		if tile.is_passable and !tile.entity: return tile
 	return tile
+
+func generate_monsters() -> void:
+	monsters = []
+	var num_monsters = Singletons.map_level + 1
+	for i in range(num_monsters):
+		spawn_monster()
+
+func spawn_monster() -> void:
+	var monster_type = monster_types.pick_random()
+	var monster = load("res://entities/%s.tscn" % monster_type).instantiate().create(random_passable_tile())
+	Singletons.entities_node.add_child(monster)
+	monsters.append(monster)

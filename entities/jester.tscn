@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://h0vooybyp2ky"]
+
+[ext_resource type="PackedScene" uid="uid://dvb5tyf8ytrnl" path="res://entities/entity.tscn" id="1_52ido"]
+[ext_resource type="Script" path="res://entities/jester.gd" id="2_dudg7"]
+
+[node name="Jester" instance=ExtResource("1_52ido")]
+script = ExtResource("2_dudg7")

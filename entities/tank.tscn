@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck561o30nnbdt"]
+
+[ext_resource type="PackedScene" uid="uid://dvb5tyf8ytrnl" path="res://entities/entity.tscn" id="1_ipph5"]
+[ext_resource type="Script" path="res://entities/tank.gd" id="2_3nlpr"]
+
+[node name="Tank" instance=ExtResource("1_ipph5")]
+script = ExtResource("2_3nlpr")
