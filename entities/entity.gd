@@ -1,17 +1,31 @@
 class_name Entity extends Node2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var current_hp: HFlowContainer = $CurrentHP
 
-var sprite_index:int
 var sprite_color:Color
-var hp:int
 var dead:bool = false
+var attacked_this_turn:bool
+var stunned:bool
+
+var sprite_index:int :
+	set(value):
+		sprite_index = value
+		if sprite_2d != null:
+			sprite_2d.frame = sprite_index
+var hp:float :
+	set(value):
+		hp = value
+		if current_hp != null:
+			for hp_val:TextureRect in current_hp.get_children():
+				hp_val.visible = hp_val.get_index() < hp
 
 var tile:Tile = null
 
 func _ready() -> void:
-	sprite_2d.frame = sprite_index
+	sprite_index = sprite_index
 	if sprite_color: sprite_2d.modulate = sprite_color
+	hp = hp
 
 func create(new_tile:Tile, _sprite_index:int, starting_hp:int) -> Entity:
 	move(new_tile)
@@ -24,6 +38,10 @@ func try_move(dx:int, dy:int) -> bool:
 	if new_tile.is_passable:
 		if new_tile.entity == null:
 			move(new_tile)
+		elif (self is Player) != (new_tile.entity is Player):
+			attacked_this_turn = true
+			new_tile.entity.stunned = true
+			new_tile.entity.hit(1)
 		return true
 	else: return false
 
@@ -34,7 +52,23 @@ func move(new_tile:Tile) -> void:
 	tile.entity = self
 	position = tile.tile_position * Singletons.TILE_SIZE
 
+func hit(damage:float) -> void:
+	hp -= damage
+	if hp <= 0:
+		die()
+
+func die() -> void:
+	dead = true
+	tile.entity = null
+	sprite_index = 1
+
+func heal(damage:float) -> void:
+	hp = min(Singletons.map_hp, hp + damage)
+
 func update() -> void:
+	if stunned:
+		stunned = false
+		return
 	do_stuff()
 
 func do_stuff() -> void:

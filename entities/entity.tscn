@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvb5tyf8ytrnl"]
+[gd_scene load_steps=4 format=3 uid="uid://dvb5tyf8ytrnl"]
 
 [ext_resource type="Script" path="res://entities/entity.gd" id="1_uyisy"]
 [ext_resource type="Texture2D" uid="uid://2p20bkfbe67n" path="res://assets/spritesheet.png" id="2_xhaol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i01u"]
+atlas = ExtResource("2_xhaol")
+region = Rect2(144, 0, 16, 16)
+filter_clip = true
 
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_uyisy")
@@ -11,3 +16,43 @@ texture_filter = 1
 position = Vector2(8, 8)
 texture = ExtResource("2_xhaol")
 hframes = 32
+
+[node name="CurrentHP" type="HFlowContainer" parent="."]
+custom_minimum_size = Vector2(28, 0)
+offset_top = -5.0
+offset_right = 28.0
+offset_bottom = 16.0
+theme_override_constants/h_separation = -11
+theme_override_constants/v_separation = -11
+reverse_fill = true
+
+[node name="TextureRect" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")
+
+[node name="TextureRect2" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")
+
+[node name="TextureRect3" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")
+
+[node name="TextureRect4" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")
+
+[node name="TextureRect5" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")
+
+[node name="TextureRect6" type="TextureRect" parent="CurrentHP"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_3i01u")

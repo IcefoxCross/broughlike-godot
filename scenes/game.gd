@@ -11,6 +11,7 @@ static var NUM_TILES := 9
 
 func _ready() -> void:
 	Singletons.map_level = 1
+	Singletons.map_hp = 6
 	Singletons.entities_node = entities
 	Singletons.game_scene = self
 	map.generate_level()

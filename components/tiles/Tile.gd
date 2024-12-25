@@ -38,3 +38,14 @@ func get_connected_tiles() -> Array:
 		connected_tiles.append_array(neighbors)
 		frontier.append_array(neighbors)
 	return connected_tiles
+
+func replace(new_tile_type:String) -> Tile:
+	var new_tile:Tile
+	match new_tile_type:
+		"Wall":
+			new_tile = Wall.new(tile_position.x, tile_position.y)
+		"Floor":
+			new_tile = Floor.new(tile_position.x, tile_position.y)
+	Singletons.map.tiles[tile_position.x][tile_position.y] = new_tile
+	Singletons.map.draw_map()
+	return Singletons.map.tiles[tile_position.x][tile_position.y]
