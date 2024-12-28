@@ -1,9 +1,16 @@
 class_name Tile extends Node
 
+const TREASURE_TILE = 12
+
 var tile_position:Vector2
 var sprite_index:int
 var is_passable:bool
 var entity:Entity
+var has_treasure:bool :
+	set(value):
+		has_treasure = value
+		Singletons.map.treasure_tiles.set_cell(
+			tile_position, 0, Vector2(TREASURE_TILE if has_treasure else -1, 0))
 
 func _init(x:int, y:int, index:int, passable:bool) -> void:
 	tile_position = Vector2(x, y)

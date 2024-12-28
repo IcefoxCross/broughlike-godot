@@ -3,8 +3,10 @@ class_name Game extends Node2D
 @onready var map: Map = $Map
 @onready var entities: Node2D = $Entities
 @onready var title_screen: Control = $TitleScreen
+@onready var scores_container: ScoresContainer = %ScoresContainer
 
 @onready var level_label: Label = %LevelLabel
+@onready var score_label: Label = %ScoreLabel
 
 const PLAYER_ENTITY = preload("res://entities/player.tscn")
 
@@ -12,6 +14,11 @@ var player:Player
 
 var spawn_rate:int
 var spawn_counter:int
+
+var score:int :
+	set(value):
+		score = value
+		score_label.text = "Score: %s" % score
 
 func _ready() -> void:
 	Singletons.map_level = 1
@@ -23,12 +30,11 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
+		get_viewport().set_input_as_handled()
 		match Singletons.game_state:
 			"title":
-				get_viewport().set_input_as_handled()
 				start_game()
 			"dead":
-				get_viewport().set_input_as_handled()
 				show_title()
 			"running":
 				if Input.is_action_just_pressed("move_down"): player.try_move(0, 1)
@@ -42,6 +48,7 @@ func tick() -> void:
 		else:
 			map.remove_monster(monster)
 	if player.dead:
+		Singletons.add_score(score, false)
 		Singletons.game_state = "dead"
 	spawn_counter -= 1
 	if spawn_counter == 0:
@@ -50,12 +57,14 @@ func tick() -> void:
 		spawn_rate -= 1
 
 func show_title() -> void:
+	scores_container.update_scores()
 	title_screen.show()
 	Singletons.game_state = "title"
 
 func start_game() -> void:
 	title_screen.hide()
 	Singletons.map_level = 1
+	score = 0
 	start_level(Singletons.starting_hp)
 	Singletons.game_state = "running"
 

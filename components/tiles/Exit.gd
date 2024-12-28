@@ -8,6 +8,7 @@ func _init(x:int, y:int) -> void:
 func step_on(entity:Entity) -> void:
 	if entity is Player:
 		if Singletons.map_level == Singletons.num_levels:
+			Singletons.add_score(Singletons.game_scene.score, true)
 			Singletons.game_scene.show_title()
 		else:
 			Singletons.map_level += 1

@@ -32,3 +32,6 @@ script = ExtResource("1_y6cd4")
 
 [node name="MapTiles" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_he11c")
+
+[node name="TreasureTiles" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_he11c")

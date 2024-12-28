@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvhh3vcfukkts"]
+[gd_scene load_steps=5 format=3 uid="uid://dvhh3vcfukkts"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_77g5w"]
 [ext_resource type="PackedScene" uid="uid://ubylvg65g5l1" path="res://components/map/map.tscn" id="2_cfoe7"]
 [ext_resource type="FontFile" uid="uid://dglymxutn4dtt" path="res://assets/Anonymous.ttf" id="3_euvm1"]
+[ext_resource type="Script" path="res://components/scoring/scores_container.gd" id="4_7qcsv"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_77g5w")
@@ -45,12 +46,20 @@ theme_override_font_sizes/font_size = 8
 text = "Level:"
 horizontal_alignment = 1
 
+[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.623529, 0.25098, 1, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 8
+text = "Score:"
+horizontal_alignment = 1
+
 [node name="Map" parent="." instance=ExtResource("2_cfoe7")]
 
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="TitleScreen" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 208.0
@@ -91,3 +100,315 @@ theme_override_fonts/font = ExtResource("3_euvm1")
 theme_override_font_sizes/font_size = 16
 text = "BROUGH BROS."
 horizontal_alignment = 1
+
+[node name="ScoresContainer" type="VBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+script = ExtResource("4_7qcsv")
+
+[node name="Titles" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Titles"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "RUN"
+
+[node name="Label2" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Titles"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "SCORE"
+
+[node name="Label3" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Titles"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "TOTAL"
+
+[node name="Score1" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score1"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score1"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score1"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score2" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score2"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score2"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score2"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score3" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score3"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score3"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score3"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score4" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score4"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score4"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score4"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score5" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score5"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score5"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score5"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score6" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score6"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score6"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score6"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score7" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score7"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score7"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score7"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score8" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score8"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score8"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score8"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score9" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score9"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score9"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score9"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="Score10" type="HBoxContainer" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RunLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score10"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="ScoreLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score10"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"
+
+[node name="TotalLabel" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer/ScoresContainer/Score10"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 4
+text = "1"

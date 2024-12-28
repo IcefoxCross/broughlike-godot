@@ -1,6 +1,7 @@
 class_name Map extends Node2D
 
 @onready var map_tiles: TileMapLayer = $MapTiles
+@onready var treasure_tiles: TileMapLayer = $TreasureTiles
 
 var tiles:Array
 
@@ -13,7 +14,9 @@ func _ready() -> void:
 func draw_map() -> void:
 	for i in range(Singletons.NUM_TILES):
 		for j in range(Singletons.NUM_TILES):
-			map_tiles.set_cell(Vector2(i, j), 0, Vector2(get_tile(i, j).sprite_index, 0))
+			var tile:Tile = get_tile(i, j)
+			map_tiles.set_cell(Vector2(i, j), 0, Vector2(tile.sprite_index, 0))
+			treasure_tiles.set_cell(Vector2(i, j), 0, Vector2(Tile.TREASURE_TILE if tile.has_treasure else -1, 0))
 
 func generate_level() -> void:
 	var timeout = 1000
@@ -22,6 +25,8 @@ func generate_level() -> void:
 		if generate_tiles() == random_passable_tile().get_connected_tiles().size():
 			break
 	generate_monsters()
+	for i in range(3):
+		random_empty_tile().has_treasure = true
 
 func generate_tiles() -> int:
 	var passable_tiles = 0
@@ -54,6 +59,17 @@ func random_passable_tile() -> Tile:
 		var y = randi_range(0, Singletons.NUM_TILES-1)
 		tile = get_tile(x, y)
 		if tile.is_passable and !tile.entity: return tile
+	return tile
+
+func random_empty_tile() -> Tile:
+	var tile:Tile = null
+	var timeout = 1000
+	while timeout > 0:
+		timeout -= 1
+		var x = randi_range(0, Singletons.NUM_TILES-1)
+		var y = randi_range(0, Singletons.NUM_TILES-1)
+		tile = get_tile(x, y)
+		if tile.is_passable and !tile.entity and !tile.has_treasure: return tile
 	return tile
 
 func generate_monsters() -> void:
