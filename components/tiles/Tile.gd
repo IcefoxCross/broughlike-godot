@@ -46,6 +46,11 @@ func replace(new_tile_type:String) -> Tile:
 			new_tile = Wall.new(tile_position.x, tile_position.y)
 		"Floor":
 			new_tile = Floor.new(tile_position.x, tile_position.y)
+		"Exit":
+			new_tile = Exit.new(tile_position.x, tile_position.y)
 	Singletons.map.tiles[tile_position.x][tile_position.y] = new_tile
 	Singletons.map.draw_map()
 	return Singletons.map.tiles[tile_position.x][tile_position.y]
+
+func step_on(entity:Entity) -> void:
+	pass

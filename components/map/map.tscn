@@ -27,6 +27,7 @@ texture = ExtResource("2_qflq4")
 sources/0 = SubResource("TileSetAtlasSource_kgbf4")
 
 [node name="Map" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_y6cd4")
 
 [node name="MapTiles" type="TileMapLayer" parent="."]

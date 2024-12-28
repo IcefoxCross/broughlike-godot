@@ -3,16 +3,25 @@ class_name Entity extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var current_hp: HFlowContainer = $CurrentHP
 
+const TELEPORT_INDEX = 10
+
 var sprite_color:Color
 var dead:bool = false
 var attacked_this_turn:bool
 var stunned:bool
+var teleport_counter:int :
+	set(value):
+		teleport_counter = max(0, value)
+		sprite_2d.frame = TELEPORT_INDEX if teleport_counter > 0 else sprite_index
+		if sprite_color: sprite_2d.modulate = Color.WHITE if teleport_counter > 0 else sprite_color
+		current_hp.visible = teleport_counter == 0
 
 var sprite_index:int :
 	set(value):
 		sprite_index = value
 		if sprite_2d != null:
 			sprite_2d.frame = sprite_index
+
 var hp:float :
 	set(value):
 		hp = value
@@ -24,8 +33,8 @@ var tile:Tile = null
 
 func _ready() -> void:
 	sprite_index = sprite_index
-	if sprite_color: sprite_2d.modulate = sprite_color
 	hp = hp
+	teleport_counter = 2
 
 func create(new_tile:Tile, _sprite_index:int, starting_hp:int) -> Entity:
 	move(new_tile)
@@ -51,6 +60,7 @@ func move(new_tile:Tile) -> void:
 	tile = new_tile
 	tile.entity = self
 	position = tile.tile_position * Singletons.TILE_SIZE
+	tile.step_on(self)
 
 func hit(damage:float) -> void:
 	hp -= damage
@@ -63,10 +73,11 @@ func die() -> void:
 	sprite_index = 1
 
 func heal(damage:float) -> void:
-	hp = min(Singletons.map_hp, hp + damage)
+	hp = min(Singletons.max_hp, hp + damage)
 
 func update() -> void:
-	if stunned:
+	teleport_counter -= 1
+	if stunned or teleport_counter > 0:
 		stunned = false
 		return
 	do_stuff()

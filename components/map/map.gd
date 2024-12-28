@@ -11,8 +11,8 @@ func _ready() -> void:
 	Singletons.map = self
 
 func draw_map() -> void:
-	for i in range(Game.NUM_TILES):
-		for j in range(Game.NUM_TILES):
+	for i in range(Singletons.NUM_TILES):
+		for j in range(Singletons.NUM_TILES):
 			map_tiles.set_cell(Vector2(i, j), 0, Vector2(get_tile(i, j).sprite_index, 0))
 
 func generate_level() -> void:
@@ -26,9 +26,9 @@ func generate_level() -> void:
 func generate_tiles() -> int:
 	var passable_tiles = 0
 	tiles = []
-	for i in range(Game.NUM_TILES):
+	for i in range(Singletons.NUM_TILES):
 		tiles.append([])
-		for j in range(Game.NUM_TILES):
+		for j in range(Singletons.NUM_TILES):
 			var tile:Tile
 			if (randf() < 0.3 or !in_bounds(i, j)):
 				tile = Wall.new(i, j)
@@ -39,7 +39,7 @@ func generate_tiles() -> int:
 	return passable_tiles
 
 func in_bounds(x:int, y:int) -> bool:
-	return (x > 0 and y > 0 and x < Game.NUM_TILES-1 and y < Game.NUM_TILES-1)
+	return (x > 0 and y > 0 and x < Singletons.NUM_TILES-1 and y < Singletons.NUM_TILES-1)
 
 func get_tile(x:int, y:int) -> Tile:
 	if in_bounds(x, y): return tiles[x][y]
@@ -50,8 +50,8 @@ func random_passable_tile() -> Tile:
 	var timeout = 1000
 	while timeout > 0:
 		timeout -= 1
-		var x = randi_range(0, Game.NUM_TILES-1)
-		var y = randi_range(0, Game.NUM_TILES-1)
+		var x = randi_range(0, Singletons.NUM_TILES-1)
+		var y = randi_range(0, Singletons.NUM_TILES-1)
 		tile = get_tile(x, y)
 		if tile.is_passable and !tile.entity: return tile
 	return tile
@@ -67,3 +67,7 @@ func spawn_monster() -> void:
 	var monster = load("res://entities/%s.tscn" % monster_type).instantiate().create(random_passable_tile())
 	Singletons.entities_node.add_child(monster)
 	monsters.append(monster)
+
+func remove_monster(monster:Entity) -> void:
+	monsters.erase(monster)
+	monster.queue_free()

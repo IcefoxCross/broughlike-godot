@@ -1,8 +1,11 @@
 res://scenes/game.tscn
-res://components/tiles/Tile.gd
-res://entities/eater.gd
-res://components/map/map.gd
+res://entities/entity.gd
+res://entities/player.gd
 res://entities/entity.tscn
 res://entities/player.tscn
 res://components/map/map.tscn
-res://entities/jester.gd
+res://scenes/game.gd
+res://components/tiles/Tile.gd
+res://components/tiles/Exit.gd
+res://autoloads/Singletons.gd
+res://components/map/map.gd

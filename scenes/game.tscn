@@ -1,11 +1,93 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvhh3vcfukkts"]
+[gd_scene load_steps=4 format=3 uid="uid://dvhh3vcfukkts"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_77g5w"]
 [ext_resource type="PackedScene" uid="uid://ubylvg65g5l1" path="res://components/map/map.tscn" id="2_cfoe7"]
+[ext_resource type="FontFile" uid="uid://dglymxutn4dtt" path="res://assets/Anonymous.ttf" id="3_euvm1"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_77g5w")
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 208.0
+offset_bottom = 144.0
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.294118, 0, 0.509804, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 144.0
+offset_right = 208.0
+offset_bottom = 144.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="UI/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.623529, 0.25098, 1, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 8
+text = "Level:"
+horizontal_alignment = 1
+
 [node name="Map" parent="." instance=ExtResource("2_cfoe7")]
 
 [node name="Entities" type="Node2D" parent="."]
+
+[node name="TitleScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 208.0
+offset_bottom = 144.0
+
+[node name="ColorRect" type="ColorRect" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 12
+text = "SUPER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TitleScreen/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 16
+text = "BROUGH BROS."
+horizontal_alignment = 1
