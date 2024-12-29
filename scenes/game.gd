@@ -5,6 +5,8 @@ class_name Game extends Node2D
 @onready var title_screen: Control = $TitleScreen
 @onready var scores_container: ScoresContainer = %ScoresContainer
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var ui_container: UIContainer = $UI/HBoxContainer/MarginContainer/UIContainer
+@onready var effects: Node2D = $Effects
 
 @onready var level_label: Label = %LevelLabel
 @onready var score_label: Label = %ScoreLabel
@@ -35,7 +37,7 @@ func _ready() -> void:
 	
 	show_title()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	shake_amount -= 1
 	if shake_amount > 0:
 		var shake_angle = randf() * PI * 2
@@ -64,6 +66,7 @@ func tick() -> void:
 		map.spawn_monster()
 		spawn_counter = spawn_rate
 		spawn_rate -= 1
+	player.update()
 	if player.dead:
 		Singletons.add_score(score, false)
 		Singletons.game_state = "dead"
@@ -78,11 +81,12 @@ func show_title() -> void:
 func start_game() -> void:
 	title_screen.hide()
 	Singletons.map_level = 1
+	Singletons.num_spells = 9
 	score = 0
 	start_level(Singletons.starting_hp)
 	Singletons.game_state = "running"
 
-func start_level(player_hp:float) -> void:
+func start_level(player_hp:float, player_spells:Array = []) -> void:
 	level_label.text = "Level: %s" % Singletons.map_level
 	for e:Entity in entities.get_children():
 		e.queue_free()
@@ -91,8 +95,12 @@ func start_level(player_hp:float) -> void:
 	map.generate_level()
 	map.draw_map()
 	player = PLAYER_ENTITY.instantiate().create(map.random_passable_tile())
+	player.spells_updated.connect(ui_container.update_spells)
 	entities.add_child(player)
 	player.hp = player_hp
+	if !player_spells.is_empty():
+		player.spells = player_spells
+		player.spells_updated.emit(player.spells)
 	Singletons.player_node = player
 	map.random_passable_tile().replace("Exit")
 	player.can_act = true

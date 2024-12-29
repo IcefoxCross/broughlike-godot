@@ -78,11 +78,12 @@ func generate_monsters() -> void:
 	for i in range(num_monsters):
 		spawn_monster()
 
-func spawn_monster() -> void:
+func spawn_monster(teleport_counter:int = 2) -> void:
 	var monster_type = monster_types.pick_random()
 	var monster = load("res://entities/%s.tscn" % monster_type).instantiate().create(random_passable_tile())
 	Singletons.entities_node.add_child(monster)
 	monsters.append(monster)
+	monster.teleport_counter = teleport_counter
 
 func remove_monster(monster:Entity) -> void:
 	monsters.erase(monster)

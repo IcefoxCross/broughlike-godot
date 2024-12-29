@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvhh3vcfukkts"]
+[gd_scene load_steps=6 format=3 uid="uid://dvhh3vcfukkts"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_77g5w"]
 [ext_resource type="PackedScene" uid="uid://ubylvg65g5l1" path="res://components/map/map.tscn" id="2_cfoe7"]
+[ext_resource type="Script" path="res://components/spells/ui_container.gd" id="2_u71xu"]
 [ext_resource type="FontFile" uid="uid://dglymxutn4dtt" path="res://assets/Anonymous.ttf" id="3_euvm1"]
 [ext_resource type="Script" path="res://components/scoring/scores_container.gd" id="4_7qcsv"]
 
@@ -30,34 +31,101 @@ offset_right = 208.0
 offset_bottom = 144.0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+
+[node name="UIContainer" type="VBoxContainer" parent="UI/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_u71xu")
+
+[node name="Control" type="Control" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="UI/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="LevelLabel" type="Label" parent="UI/HBoxContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.623529, 0.25098, 1, 1)
 theme_override_fonts/font = ExtResource("3_euvm1")
 theme_override_font_sizes/font_size = 8
 text = "Level:"
-horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.623529, 0.25098, 1, 1)
 theme_override_fonts/font = ExtResource("3_euvm1")
 theme_override_font_sizes/font_size = 8
 text = "Score:"
-horizontal_alignment = 1
+
+[node name="SpellLabel1" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel2" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel3" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel4" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel5" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel6" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel7" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel8" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel9" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
+
+[node name="SpellLabel10" type="Label" parent="UI/HBoxContainer/MarginContainer/UIContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.00784314, 0.941176, 0.941176, 1)
+theme_override_fonts/font = ExtResource("3_euvm1")
+theme_override_font_sizes/font_size = 6
 
 [node name="Map" parent="." instance=ExtResource("2_cfoe7")]
 
 [node name="Entities" type="Node2D" parent="."]
+
+[node name="Effects" type="Node2D" parent="."]
 
 [node name="TitleScreen" type="Control" parent="."]
 layout_mode = 3

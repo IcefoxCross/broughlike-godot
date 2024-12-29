@@ -59,5 +59,11 @@ func replace(new_tile_type:String) -> Tile:
 	Singletons.map.draw_map()
 	return Singletons.map.tiles[tile_position.x][tile_position.y]
 
-func step_on(entity:Entity) -> void:
+func step_on(other_entity:Entity) -> void:
 	pass
+
+func set_effect(effect_index:int) -> void:
+	var effect = load("res://components/effects/effect.tscn").instantiate()
+	Singletons.game_scene.effects.add_child(effect)
+	effect.get_node("Sprite2D").frame = effect_index
+	effect.position = tile_position * Singletons.TILE_SIZE

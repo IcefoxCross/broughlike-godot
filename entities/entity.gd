@@ -11,6 +11,12 @@ var dead:bool = false
 var attacked_this_turn:bool
 var stunned:bool
 var move_offset:Vector2
+var last_move:Vector2
+var bonus_attack:int
+var shield:int :
+	set(value):
+		shield = max(0, value)
+
 var teleport_counter:int :
 	set(value):
 		teleport_counter = max(0, value)
@@ -38,6 +44,9 @@ func _ready() -> void:
 	hp = hp
 	teleport_counter = 2
 	move_offset = Vector2.ZERO
+	last_move = Vector2.LEFT
+	bonus_attack = 0
+	shield = 0
 
 func create(new_tile:Tile, _sprite_index:int, starting_hp:int) -> Entity:
 	move(new_tile)
@@ -48,26 +57,30 @@ func create(new_tile:Tile, _sprite_index:int, starting_hp:int) -> Entity:
 func try_move(dx:int, dy:int) -> bool:
 	var new_tile = tile.get_neighbor(dx, dy)
 	if new_tile.is_passable:
+		last_move = Vector2(dx, dy)
 		if new_tile.entity == null:
 			await move(new_tile)
 		elif (self is Player) != (new_tile.entity is Player):
-			attacked_this_turn = true
-			new_tile.entity.stunned = true
-			new_tile.entity.hit(1)
-			Singletons.game_scene.shake_amount = 5
-			move_offset = tile.tile_position.direction_to(new_tile.tile_position) / 2
-			var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			tween.tween_property(self, "position", tile.tile_position * Singletons.TILE_SIZE, TWEEN_TIME)\
-				.from((tile.tile_position + move_offset) * Singletons.TILE_SIZE)
-			await  tween.finished
-			move_offset = Vector2.ZERO
+			if new_tile.entity.teleport_counter > 0: return false
+			else:
+				attacked_this_turn = true
+				new_tile.entity.stunned = true
+				new_tile.entity.hit(1 + bonus_attack)
+				bonus_attack = 0
+				Singletons.game_scene.shake_amount = 5
+				move_offset = tile.tile_position.direction_to(new_tile.tile_position) / 2
+				var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				tween.tween_property(self, "position", tile.tile_position * Singletons.TILE_SIZE, TWEEN_TIME)\
+					.from((tile.tile_position + move_offset) * Singletons.TILE_SIZE)
+				await  tween.finished
+				move_offset = Vector2.ZERO
 		return true
 	else: return false
 
 func move(new_tile:Tile) -> void:
 	if tile != null:
 		tile.entity = null
-		move_offset = tile.tile_position.direction_to(new_tile.tile_position)
+		move_offset = Vector2(new_tile.tile_position.x - tile.tile_position.x, new_tile.tile_position.y - tile.tile_position.y)
 	tile = new_tile
 	tile.entity = self
 	if move_offset != Vector2.ZERO:
@@ -79,6 +92,8 @@ func move(new_tile:Tile) -> void:
 	tile.step_on(self)
 
 func hit(damage:float) -> void:
+	if teleport_counter > 0: return
+	if shield > 0: return
 	hp -= damage
 	if hp <= 0:
 		die()
@@ -92,6 +107,7 @@ func die() -> void:
 	sprite_2d.visible = self is Player
 
 func heal(damage:float) -> void:
+	if teleport_counter > 0: return
 	hp = min(Singletons.max_hp, hp + damage)
 
 func update() -> void:

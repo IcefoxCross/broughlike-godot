@@ -9,6 +9,7 @@ var NUM_TILES := 9
 var TILE_SIZE = 16
 
 var map_level:int
+var num_spells:int
 var max_hp:int
 
 var starting_hp = 3
