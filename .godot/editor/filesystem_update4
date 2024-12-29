@@ -9,3 +9,8 @@ res://autoloads/Singletons.gd
 res://scenes/game.gd
 res://components/tiles/Exit.gd
 res://components/scoring/scores_container.gd
+res://entities/entity.gd
+res://entities/player.gd
+res://entities/snake.gd
+res://autoloads/audio_manager.tscn
+res://autoloads/audio_manager.gd

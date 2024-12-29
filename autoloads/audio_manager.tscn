@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://crru6at6aa7a0"]
+
+[ext_resource type="Script" path="res://autoloads/audio_manager.gd" id="1_bxl7u"]
+[ext_resource type="AudioStream" uid="uid://eehxatw1na0a" path="res://assets/hit1.wav" id="2_4j452"]
+[ext_resource type="AudioStream" uid="uid://bpyxcsrmpm274" path="res://assets/hit2.wav" id="3_0slq0"]
+[ext_resource type="AudioStream" uid="uid://b8641700y51tm" path="res://assets/newLevel.wav" id="4_oeu7j"]
+[ext_resource type="AudioStream" uid="uid://pbsuivfs2f1x" path="res://assets/spell.wav" id="5_bdmrj"]
+[ext_resource type="AudioStream" uid="uid://bxoge8rqgl8i3" path="res://assets/treasure.wav" id="6_sahvj"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_bxl7u")
+
+[node name="Hit1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4j452")
+
+[node name="Hit2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0slq0")
+
+[node name="NewLevel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oeu7j")
+
+[node name="Spell" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bdmrj")
+
+[node name="Treasure" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_sahvj")

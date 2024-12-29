@@ -7,6 +7,6 @@ func create(new_tile:Tile, _sprite_index:int=5, starting_hp:int=1) -> Entity:
 
 func do_stuff() -> void:
 	attacked_this_turn = false
-	super()
+	await super()
 	if !attacked_this_turn:
-		super()
+		await super()

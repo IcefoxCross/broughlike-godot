@@ -412,3 +412,6 @@ theme_override_colors/font_color = Color(0.866667, 0.47451, 0.866667, 1)
 theme_override_fonts/font = ExtResource("3_euvm1")
 theme_override_font_sizes/font_size = 4
 text = "1"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(104, 72)
