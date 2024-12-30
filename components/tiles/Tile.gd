@@ -1,11 +1,18 @@
 class_name Tile extends Node
+## Base Tile class
 
+## Sprite Index for the Treasure
 const TREASURE_TILE = 12
 
+## Local Tile position on the Map grid
 var tile_position:Vector2
+## Sprite Index for the Tile
 var sprite_index:int
+## Allows an Entity pass through this Tile or not
 var is_passable:bool
+## Reference to the Entity over this Tile
 var entity:Entity
+## Shows if the Tile has a Treasure
 var has_treasure:bool :
 	set(value):
 		has_treasure = value
@@ -17,12 +24,15 @@ func _init(x:int, y:int, index:int, passable:bool) -> void:
 	sprite_index = index
 	is_passable = passable
 
+## Returns local distance to given Tile
 func distance_to(other_tile:Tile) -> int:
 	return abs(tile_position.x - other_tile.tile_position.x) + abs(tile_position.y - other_tile.tile_position.y)
 
+## Returns a Tile given the local difference
 func get_neighbor(dx:int, dy:int) -> Tile:
 	return Singletons.map.get_tile(tile_position.x + dx, tile_position.y + dy)
 
+## Returns 4 adjacent Tiles in a random order
 func get_adjacent_neighbors() -> Array:
 	var out = [
 		get_neighbor(0, -1),
@@ -33,9 +43,11 @@ func get_adjacent_neighbors() -> Array:
 	out.shuffle()
 	return out
 
+## Returns all adjacent Tiles that can be passed through
 func get_adjacent_passable_neighbors() -> Array:
 	return get_adjacent_neighbors().filter(func(t:Tile): return t.is_passable)
 
+## Returns number of Tiles connected to this one
 func get_connected_tiles() -> Array:
 	var connected_tiles = [self]
 	var frontier = [self]
@@ -46,6 +58,7 @@ func get_connected_tiles() -> Array:
 		frontier.append_array(neighbors)
 	return connected_tiles
 
+## Replace current type of Tile with new one on Map
 func replace(new_tile_type:String) -> Tile:
 	var new_tile:Tile
 	match new_tile_type:
@@ -59,9 +72,11 @@ func replace(new_tile_type:String) -> Tile:
 	Singletons.map.draw_map()
 	return Singletons.map.tiles[tile_position.x][tile_position.y]
 
+## Base function for extending Classes to use
 func step_on(other_entity:Entity) -> void:
 	pass
 
+## Displays effect on top of the Tile
 func set_effect(effect_index:int) -> void:
 	var effect = load("res://components/effects/effect.tscn").instantiate()
 	Singletons.game_scene.effects.add_child(effect)

@@ -1,5 +1,7 @@
 class_name ScoresContainer extends VBoxContainer
+## Handles updating the score list on the Title Screen
 
+## Loads the score file, and displays the top 10 score, including the last run
 func update_scores() -> void:
 	var scores = Singletons.get_scores()
 	$Titles.visible = scores.size() > 0
@@ -14,6 +16,7 @@ func update_scores() -> void:
 			score_row.visible = true
 		else: score_row.visible = false
 
+## Displays the score's info on a row
 func update_score_row(score_node:HBoxContainer, data) -> void:
 	score_node.get_node("RunLabel").text = str(data.run)
 	score_node.get_node("ScoreLabel").text = str(data.score)

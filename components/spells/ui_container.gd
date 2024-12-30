@@ -1,5 +1,6 @@
 class_name UIContainer extends VBoxContainer
 
+## Update the spell list based on the Player's current spells
 func update_spells(spell_list:Array) -> void:
 	for i in range(9):
 		var spell_label = get_node("SpellLabel%s" % (i+1)) as Label

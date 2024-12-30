@@ -8,3 +8,17 @@ res://entities/entity.tscn
 res://entities/player.tscn
 res://components/map/map.tscn
 res://autoloads/audio_manager.tscn
+res://autoloads/Singletons.gd
+res://autoloads/audio_manager.gd
+res://components/map/map.gd
+res://components/scoring/scores_container.gd
+res://components/spells/ui_container.gd
+res://components/tiles/Tile.gd
+res://components/tiles/Wall.gd
+res://components/tiles/Floor.gd
+res://components/tiles/Exit.gd
+res://entities/bird.gd
+res://entities/eater.gd
+res://entities/jester.gd
+res://entities/snake.gd
+res://entities/tank.gd

@@ -1,4 +1,5 @@
 class_name Wall extends Tile
+## Unpassable Tile
 
 const WALL_INDEX = 3
 

@@ -1,10 +1,12 @@
 class_name Floor extends Tile
+## Passable Tile, can hold Entities and Treasure
 
 const FLOOR_INDEX = 2
 
 func _init(x:int, y:int) -> void:
 	super(x, y, FLOOR_INDEX, true)
 
+## If Player steps on this Tile and it has Treasure, increases Score, Spells and spawns a new Enemy
 func step_on(other_entity:Entity) -> void:
 	if other_entity is Player and has_treasure:
 		AudioManager.play_sound("Treasure")
